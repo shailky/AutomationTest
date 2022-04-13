@@ -45,6 +45,12 @@ public class CurrencyConverterPage extends PageObject {
     @FindBy(xpath="//div[@class='currency-conversion-tables__TablesContainer-sc-3fg8ob-0 dpMxOr']/div[1]/table//tbody/tr[1]/td[2]")
     public WebElementFacade val_ConvertionValue;
 
+    @FindBy(xpath="//label[text()='Amount']/following-sibling::div[@aria-live='assertive']")
+    public WebElementFacade lbl_errorMessage;
+
+    @FindBy(xpath="//div[@class='unit-rates___StyledDiv-sc-1dk593y-0 dEqdnx']/p[1]")
+    public WebElementFacade lbl_conversionValue;
+
     public String optionsFromValues="//*[(contains(@class,'converterform-dropdown__option') or contains(@class,'ListboxOption')) and contains(.,'REPLACE_TEXT')]";
 
 }

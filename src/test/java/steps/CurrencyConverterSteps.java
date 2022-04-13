@@ -139,6 +139,16 @@ public class CurrencyConverterSteps extends CommonSteps{
     }
 
     /**
+     * Method verifies the error message displayed under amount field
+     * @param errorMessage
+     * @return
+     */
+    public Boolean verifyErrorMessageDisplayed(String errorMessage){
+
+        return currencyConverterPage.lbl_errorMessage.getText().equalsIgnoreCase(errorMessage);
+    }
+
+    /**
      * Method is used to close the browser
      */
     public void closeTheBrowser(){
@@ -146,4 +156,26 @@ public class CurrencyConverterSteps extends CommonSteps{
         getDriver().close();
         getDriver().quit();
     }
+
+    /**
+     * Method multiplies the currency value and then amount entered by user and verifies the result
+     * @param sessionVariable
+     * @param amount
+     * @param currency
+     */
+    public void noteConvertedValue(String sessionVariable, String amount, String currency){
+
+        Double value1=Double.valueOf(amount);
+        Double value2=Double.valueOf(Serenity.sessionVariableCalled(currency));
+        String result=String.valueOf(value1*value2);
+        Serenity.setSessionVariable(sessionVariable).to(result.substring(0,7));
+    }
+
+    public void noteConversionBaseValue(String sessionVariable){
+
+        String element=currencyConverterPage.lbl_conversionValue.getText();
+        String value=element.split("=")[1].trim().split(" ")[0].trim();
+        Serenity.setSessionVariable(sessionVariable).to(value);
+    }
+
 }

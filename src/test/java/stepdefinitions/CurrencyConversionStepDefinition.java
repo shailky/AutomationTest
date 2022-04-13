@@ -91,11 +91,32 @@ public class CurrencyConversionStepDefinition {
         currencyConverterSteps.noteConvertedValueFromConversionTable(sessionVariable);
     }
 
+    @Then("^I verify \"([^\"]*)\" is displayed under Amount field$")
+    public void verifyTheErrorMessageDisplayedUnderAmountField(String errorMessage){
+
+        log.INFO("I verify "+errorMessage+" should be displayed under amount field");
+        assertThat(currencyConverterSteps.verifyErrorMessageDisplayed(errorMessage)).isTrue();
+    }
+
     @And("^I close the application$")
     public void iCloseTheApplication(){
 
         log.INFO("I close the application");
         currencyConverterSteps.closeTheBrowser();
+    }
+
+    @And("^I note \"([^\"]*)\" value with \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void iNoteTheMultipliedValueOfCurrencyAndValue(String sessionVariable, String amount, String currency){
+
+        log.INFO("I verify the multiplied Value");
+        currencyConverterSteps.noteConvertedValue(sessionVariable,amount,currency);
+    }
+
+    @And("^I note \"([^\"]*)\" as base conversion value$")
+    public void iNoteBaseValue(String sessionKey){
+
+        log.INFO("I note base value");
+        currencyConverterSteps.noteConversionBaseValue(sessionKey);
     }
 
 }
